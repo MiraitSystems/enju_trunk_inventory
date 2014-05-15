@@ -2,9 +2,8 @@ class InventoryShelfBarcodesController < ApplicationController
   # GET /inventory_shelf_barcodes
   # GET /inventory_shelf_barcodes.json
   def index
-    @inventory_manage_id = params[:inventory_manage_id]
-    @inventory_manage = InventoryManage.find(@inventory_manage_id)
-    @inventory_shelf_barcodes = InventoryShelfBarcode.where(:inventory_manage_id => @inventory_manage_id)
+    prepare_options
+    @inventory_shelf_barcodes = InventoryShelfBarcode.where(:inventory_manage_id => @inventory_manage.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,12 +26,9 @@ class InventoryShelfBarcodesController < ApplicationController
   # GET /inventory_shelf_barcodes/new
   # GET /inventory_shelf_barcodes/new.json
   def new
-    @inventory_shelf_barcode = InventoryShelfBarcode.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @inventory_shelf_barcode }
-    end
+    prepare_options
+    @inventory_shelf_barcode = InventoryShelfBarcode.new(inventory_manage_id: @inventory_manage.id)
+    puts @inventory_shelf_barcode.inventory_manage.id
   end
 
   # GET /inventory_shelf_barcodes/1/edit
@@ -43,6 +39,7 @@ class InventoryShelfBarcodesController < ApplicationController
   # POST /inventory_shelf_barcodes
   # POST /inventory_shelf_barcodes.json
   def create
+    prepare_options
     @inventory_shelf_barcode = InventoryShelfBarcode.new(params[:inventory_shelf_barcode])
 
     respond_to do |format|
@@ -82,6 +79,13 @@ class InventoryShelfBarcodesController < ApplicationController
       format.html { redirect_to inventory_shelf_barcodes_url }
       format.json { head :no_content }
     end
+  end
+
+
+  private
+  def prepare_options
+    @inventory_manage_id = params[:inventory_manage_id]
+    @inventory_manage = InventoryManage.find(@inventory_manage_id)
   end
 end
 

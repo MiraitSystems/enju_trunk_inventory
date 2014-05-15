@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "enju_core", "~> 0.1.1.pre4"
   s.add_dependency 'paperclip', '2.8'
   s.add_dependency 'state_machine'
-  s.add_dependency 'enju_trunk_frbr', '~> 1.1.0'
+  s.add_dependency 'enju_trunk_frbr', '~> 2.0'
   s.add_dependency 'active_attr'
   #s.add_dependency 'enju_trunk_message'
 

@@ -1,8 +1,11 @@
 class InventoryShelfBarcode < ActiveRecord::Base
   include ActionView::Helpers::TranslationHelper
-  attr_accessible :barcode
+  attr_accessible :barcode, :inventory_manage_id
 
   default_scope order('barcode')
+
+  validates :inventory_manage_id, presence: true
+  validates :barcode, presence: true
 
   belongs_to :inventory_manage
   belongs_to :inventory_shelf_group
@@ -11,10 +14,10 @@ class InventoryShelfBarcode < ActiveRecord::Base
   def self.csv(barcodes)
     require 'csv'
     headers = []
-    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.barcode') 
-    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.inventory_shelf_group') 
-    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.shelf') 
-    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.created_at') 
+    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.barcode')
+    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.inventory_shelf_group')
+    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.shelf')
+    headers << I18n.t('activerecord.attributes.inventory_shelf_barcode.created_at')
     # force_quotesオプションで全fieldにクオート強制される
     csv_data = CSV.generate(headers: headers, write_headers: true, force_quotes: false) do |csv|
       enum = if barcodes.is_a?(Array)
@@ -36,7 +39,7 @@ class InventoryShelfBarcode < ActiveRecord::Base
         ]
       end
     end
-    csv_data.encode(Encoding::SJIS) 
+    csv_data.encode(Encoding::SJIS)
   end
 
   def bulk_insert_from_shelves(manage_id, prefix)

@@ -1,13 +1,9 @@
-<%= form_for(@inventory_shelf_group) do |f| %>
+<%= form_for([@inventory_shelf_barcode.inventory_manage, @inventory_shelf_barcode]) do |f| %>
   <%= f.error_messages -%>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, :class => 'short_name' %>
-  </div>
-  <div class="field">
-    <%= f.label :display_name %><br />
-    <%= f.text_field :display_name %>
+    <%= f.label :barcode %><br />
+    <%= f.text_field :barcode, :class => 'short_name' %>
   </div>
   <div class="actions">
     <%= f.submit %>
