@@ -21,8 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'paperclip', '2.8'
   s.add_dependency 'state_machine'
   s.add_dependency 'enju_trunk_frbr', '~> 2.0'
-  s.add_dependency 'active_attr'
-  #s.add_dependency 'enju_trunk_message'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
