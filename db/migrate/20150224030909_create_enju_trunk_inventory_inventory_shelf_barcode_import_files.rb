@@ -13,6 +13,7 @@ class CreateEnjuTrunkInventoryInventoryShelfBarcodeImportFiles < ActiveRecord::M
       t.integer :inventory_shelf_barcode_import_file_size
       t.timestamp :inventory_shelf_barcode_import_updated_at
       t.string :edit_mode
+      t.integer :inventory_manage_id
 
       t.timestamps
     end

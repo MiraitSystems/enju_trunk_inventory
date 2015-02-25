@@ -7,6 +7,9 @@ class CreateEnjuTrunkInventoryInventoryManages < ActiveRecord::Migration
       t.text :notification_dest
       t.integer :state, :null => false, :default => 0
       t.timestamp :finished_at
+      t.string :bind_type, :default => "0", :null => false
+      t.timestamp :check_started_at
+      t.timestamp :check_finished_at
 
       t.timestamps
     end
